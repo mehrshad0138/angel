@@ -74,9 +74,7 @@
     </style>
 </head>
 <body>
-
     <img src="https://www.nicepng.com/png/detail/846-8463528_victoria-secret-pink-logo-png-angel-wings-side.png" alt="Sleepwear Angel Logo" id="fixedLogo">
-
     <div id="userArea">
         <div id="userIcon" onclick="openAuthModal()">
             <img src="https://www.clipartmax.com/png/middle/59-594793_woman-silhouette-pink-clip-art-your-girlfriend-me-pole.png" alt="ورود/ثبت نام">
@@ -84,24 +82,20 @@
         <div id="userNameLabel"></div>
         <img src="https://www.pngall.com/wp-content/uploads/8/Broken-Heart-Emoji-PNG-Image.png" alt="خروج" id="logoutIcon" onclick="logout()">
     </div>
-
     <header>
         <h1>Sleepwear Angel</h1>
         <p>فرشته‌های خواب راحت و زیبا 💕</p>
     </header>
-
     <nav>
         <a onclick="showPage('mainContent')">خانه</a>
         <a onclick="showPage('aboutPage')">درباره ما</a>
         <a onclick="showPage('supportPage')">پشتیبانی</a>
         <button id="adminBtn" style="display:none;" onclick="showPage('adminPanel')">پنل ادمین</button>
     </nav>
-
     <section class="glass page" id="mainContent">
         <h2>محصولات</h2>
         <div class="products" id="productsContainer"></div>
     </section>
-
     <section class="glass page" id="aboutPage">
         <h2>درباره ما</h2>
         <div class="about-item">
@@ -117,7 +111,6 @@
             ارسال با عشق به سراسر ایران
         </div>
     </section>
-
     <section class="glass page" id="supportPage">
         <h2>پشتیبانی</h2>
         <p style="font-size:1.3em;">
@@ -128,7 +121,6 @@
             <a href="tel:09113362542">0911-336-2542</a>
         </p>
     </section>
-
     <section class="glass page" id="adminPanel" style="display:none;">
         <h2>پنل مدیریت</h2>
         <div style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
@@ -136,36 +128,28 @@
             <button class="primary" onclick="showAdminSection('manageProductsSection')">مدیریت محصولات</button>
             <button class="primary" onclick="showAdminSection('ordersSection')">سفارش‌های ثبت شده</button>
         </div>
-
         <div id="addProductSection">
             <h3>اضافه کردن محصول جدید</h3>
             <input type="text" id="prodName" placeholder="نام محصول">
             <input type="number" id="prodPrice" placeholder="قیمت (تومان)">
             <input type="number" id="prodStock" placeholder="موجودی اولیه (تعداد)" value="10">
-
             <p><strong>آپلود عکس محصول از دستگاه:</strong></p>
             <input type="file" id="prodImageUpload" accept="image/*">
             <img id="imagePreview" src="" alt="پیش‌نمایش عکس">
-
             <p>یا لینک عکس از اینترنت:</p>
             <input type="url" id="prodImageLink" placeholder="لینک عکس (اختیاری)">
-
             <button class="primary" onclick="addProduct()">افزودن محصول</button>
         </div>
-
         <div id="manageProductsSection" style="display:none;">
             <h3>مدیریت محصولات موجود</h3>
             <div id="manageProductsList"></div>
         </div>
-
         <div id="ordersSection" style="display:none;">
             <h3>سفارش‌های ثبت شده</h3>
             <div id="ordersList"></div>
         </div>
-
         <button onclick="showPage('mainContent')" style="margin-top:20px;">بازگشت به فروشگاه</button>
     </section>
-
     <div id="taskbar">
         <div class="taskbar-item" onclick="showPage('mainContent')">
             <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="خانه">
@@ -181,7 +165,6 @@
             سبد خرید
         </div>
     </div>
-
     <div class="modal" id="authModal">
         <div class="modal-content glass">
             <h2 id="modalTitle">ورود</h2>
@@ -191,14 +174,12 @@
             <p><a href="#" id="switchMode">ثبت نام کنید</a></p>
         </div>
     </div>
-
     <div class="modal" id="welcomeModal">
         <div class="modal-content">
             <p>برای ثبت خرید حتما به ادمین اطلاع بدید<span style="font-size:2em;margin:0 10px;">💕</span></p>
             <button id="welcomeOk">OK</button>
         </div>
     </div>
-
     <div class="modal" id="cartModal">
         <div class="modal-content glass">
             <h2>سبد خرید شما 🛍️</h2>
@@ -209,7 +190,6 @@
             <button onclick="cartModal.style.display='none'" style="margin-top:10px;background:#ccc;">بستن</button>
         </div>
     </div>
-
     <script>
         const productsContainer = document.getElementById('productsContainer');
         const manageProductsList = document.getElementById('manageProductsList');
@@ -228,6 +208,7 @@
 
         let currentUser = null;
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let products = JSON.parse(localStorage.getItem('products')) || [];
         let orders = JSON.parse(localStorage.getItem('orders')) || [];
 
         if (!localStorage.getItem('user_admin1')) {
@@ -328,7 +309,6 @@
             cartModal.style.display = 'none';
         };
 
-        // پیش‌نمایش عکس
         document.getElementById('prodImageUpload').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
@@ -350,7 +330,6 @@
         }
 
         function loadProducts() {
-            let products = JSON.parse(localStorage.getItem('products')) || [];
             productsContainer.innerHTML = '';
             if (products.length === 0) {
                 productsContainer.innerHTML = '<div class="empty-message">هنوز محصولی اضافه نشده! ادمین عزیز، لطفاً محصولات را از پنل اضافه کنید 😊</div>';
@@ -401,7 +380,6 @@
 
         function saveProduct(name, price, stock, image) {
             if (name && price && price > 0) {
-                let products = JSON.parse(localStorage.getItem('products')) || [];
                 products.push({name, price, stock, image: image || null});
                 localStorage.setItem('products', JSON.stringify(products));
                 alert('محصول با موفقیت اضافه شد! 💖');
@@ -420,7 +398,6 @@
         }
 
         function loadManageProducts() {
-            let products = JSON.parse(localStorage.getItem('products')) || [];
             manageProductsList.innerHTML = '';
             if (products.length === 0) {
                 manageProductsList.innerHTML = '<p style="font-size:1.3em;color:#F472B6;">محصولی وجود ندارد.</p>';
@@ -446,7 +423,6 @@
         }
 
         function editStock(index) {
-            let products = JSON.parse(localStorage.getItem('products')) || [];
             const newStock = prompt(`موجودی فعلی: ${products[index].stock || 0}\nموجودی جدید را وارد کنید:`, products[index].stock || 0);
             if (newStock !== null && !isNaN(newStock) && newStock >= 0) {
                 products[index].stock = parseInt(newStock);
@@ -459,7 +435,6 @@
 
         function deleteProduct(index) {
             if (confirm('مطمئنی می‌خوای این محصول رو کامل حذف کنی؟')) {
-                let products = JSON.parse(localStorage.getItem('products')) || [];
                 products.splice(index, 1);
                 localStorage.setItem('products', JSON.stringify(products));
                 loadManageProducts();
