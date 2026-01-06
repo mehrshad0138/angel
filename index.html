@@ -533,9 +533,10 @@
                     }
                     localStorage.setItem('user_' + username, JSON.stringify({password}));
                     alert('ثبت نام موفق! حالا وارد شو 💕');
-                    setTimeout(() => welcomeModal.style.display = 'flex', 500);
                     document.getElementById('modalTitle').textContent = 'ورود';
                     document.getElementById('authAction').textContent = 'ورود';
+                    document.getElementById('username').value = '';
+                    document.getElementById('password').value = '';
                 } else {
                     const stored = localStorage.getItem('user_' + username);
                     if (stored && JSON.parse(stored).password === password) {
@@ -545,7 +546,7 @@
                         logoutIcon.style.display = 'block';
                         if (username === 'admin1') adminBtn.style.display = 'inline-block';
                         authModal.style.display = 'none';
-                        setTimeout(() => welcomeModal.style.display = 'flex', 500);
+                        welcomeModal.style.display = 'flex'; // نمایش مودال خوش‌آمدگویی
                     } else {
                         alert('نام کاربری یا رمز اشتباه!');
                     }
@@ -564,16 +565,20 @@
             }
         }
 
+        // دکمه OK مودال خوش‌آمدگویی کاملاً فیکس شد
         document.getElementById('welcomeOk').onclick = () => {
             welcomeModal.style.display = 'none';
             showPage('mainContent');
         };
 
+        // بستن مودال با کلیک بیرون
         document.querySelectorAll('.modal').forEach(modal => {
             modal.onclick = (e) => {
                 if (e.target === modal) {
                     modal.style.display = 'none';
-                    showPage('mainContent');
+                    if (modal.id !== 'welcomeModal') {
+                        showPage('mainContent');
+                    }
                 }
             };
         });
